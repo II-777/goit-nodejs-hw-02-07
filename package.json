@@ -1,0 +1,27 @@
+{
+  "name": "goit-nodejs-hw-02",
+  "version": "1.0.0",
+  "description": "--- title: readme date: 2024-09-17 11:25 author: II-777 gitea: none include_toc: true tags:  ---",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "II-777 <45958058+II-777@users.noreply.github.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.6.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-react": "^7.36.1",
+    "globals": "^15.9.0",
+    "nodemon": "^3.1.4"
+  }
+}

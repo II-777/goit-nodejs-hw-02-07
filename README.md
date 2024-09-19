@@ -7,18 +7,30 @@ tags: goit-nodejs hw-01
 
 # goit-nodejs-hw-02
 
+https://goit-nodejs-hw-02.onrender.com
+
+## PROJECT STRUCTURE:
+```plaintext
+.
 ├── eslint.config.js
 ├── package.json
 ├── package-lock.json
 ├── README.md
-├── readme.md
 └── src
+    ├── data
+    │   └── contacts.json
     ├── db
-    │   └── initMongoDB.js
+    │   └── initMongoConnection.js
     ├── index.js
+    ├── models
+    │   └── contact.js
+    ├── server.js
+    ├── services
+    │   └── contacts.js
     └── utils
 
-3 directories, 7 files
+6 directories, 10 files
+```
 
 ## SOFTWARE USED:
 - [faker (random data generator for testing and development)](https://www.npmjs.com/package/@faker-js/faker)

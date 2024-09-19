@@ -9,6 +9,12 @@ tags: goit-nodejs hw-01
 
 https://goit-nodejs-hw-02.onrender.com
 
+## EXAMPLE USAGE:
+```bash
+curl https://goit-nodejs-hw-02.onrender.com/contacts
+curl https://goit-nodejs-hw-02.onrender.com/contacts/66eb786fe0118050355c46b9
+```
+
 ## PROJECT STRUCTURE:
 ```plaintext
 .

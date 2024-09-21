@@ -2,7 +2,7 @@
 title: README
 date: 2024-09-18 19:52
 author: II-777
-tags: goit-nodejs hw-01
+tags: goit-nodejs hw-02
 ---
 
 # goit-nodejs-hw-02

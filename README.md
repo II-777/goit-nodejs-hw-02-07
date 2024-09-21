@@ -1,25 +1,14 @@
 ---
 title: README
-date: 2024-09-18 19:52
+date: 2024-09-21 10:38
 author: II-777
-tags: goit-nodejs hw-01
+tags: goit-nodejs hw-03
 ---
 
-# goit-nodejs-hw-02
+# goit-nodejs-hw-03
 
-https://goit-nodejs-hw-02.onrender.com
 
 ## EXAMPLE USAGE:
-```bash
-# output: all contacts
-curl https://goit-nodejs-hw-02.onrender.com/contacts
-# output: contact id 66eb786fe0118050355c46b9
-curl https://goit-nodejs-hw-02.onrender.com/contacts/66eb786fe0118050355c46b9
-# output: contact not found (invalid id)
-curl https://goit-nodejs-hw-02.onrender.com/contacts/66eb786fe0118050355c46b9
-# output: not found
-curl https://goit-nodejs-hw-02.onrender.com/
-```
 
 ## PROJECT STRUCTURE:
 ```plaintext

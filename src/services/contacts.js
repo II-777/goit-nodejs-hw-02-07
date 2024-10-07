@@ -12,3 +12,10 @@ export const getContactById = async (id) => {
   // Use Mongoose's findById method to fetch a contact document by its unique ID
   return await Contact.findById(id);
 };
+
+// Function to create a new contact
+export const createContact = async (contactData) => {
+  const contact = new Contact(contactData);
+  await contact.save();
+  return contact;
+};

@@ -46,7 +46,7 @@ const setupServer = () => {
   // Export the setupServer function for use in other modules
   app.listen(PORT, () => {
       // Log a message indicating the server is running
-      console.log(`Server is running on port ${PORT}`);
+      console.log(`Server is running on http://localhost:${PORT}`);
   });
 };
 

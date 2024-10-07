@@ -1,15 +1,16 @@
 // src/routers/contacts.js
-import express from 'express';
+import { Router } from 'express';
 import { getContactsController, getContactController } from '../controllers/contacts.js';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 // Create a new instance of an Express router
-const router = express.Router();
+const router = Router();
 
 // Route to get all contacts
-router.get('/', getContactsController);
+router.get('/contacts', ctrlWrapper(getContactsController));
 
 // Route to get a contact by ID
-router.get('/:contactId', getContactController);
+router.get('/contacts/:contactId', ctrlWrapper(getContactController));
 
 // Export the router instance for use in other modules
 export default router;

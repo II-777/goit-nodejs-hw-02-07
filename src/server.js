@@ -4,6 +4,8 @@ import pino from 'pino-http';
 import cors from 'cors';
 import contactsRouter from './routers/contacts.js';
 import { env } from './utils/env.js';
+import { errorHandler } from './middlewares/errorHandler.js'
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 // Define the port to run the server, using the PORT environment variable or defaulting to 3001
 const PORT = Number(env('PORT', '3000'));
@@ -33,22 +35,13 @@ const setupServer = () => {
   });
 
   // Use the contacts router for handling routes starting with /contacts
-  app.use('/contacts', contactsRouter);
+  app.use(contactsRouter);
 
   // Handle all other routes, including non-existing routes (404)
-  app.use('*', (req, res ) => {
-    res.status(404).json({
-      message: 'Not found',
-    });
-  });
+  app.use('*', notFoundHandler);
 
   // Global error handling middleware
-  app.use((err, req, res, next) => {
-    res.status(500).json({
-      message: 'Something went wrong',
-      error: err.message,
-    });
-  });
+  app.use(errorHandler);
 
   // Export the setupServer function for use in other modules
   app.listen(PORT, () => {

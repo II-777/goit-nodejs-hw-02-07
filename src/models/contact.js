@@ -13,11 +13,11 @@ const contactSchema = new mongoose.Schema({
   isFavourite: { type: Boolean, default: false },
   // The type of contact, which can be 'work', 'home', or 'personal';
   // this field is required and defaults to 'personal'
-  contactType: { 
-    type: String, 
-    enum: ['work', 'home', 'personal'], 
-    required: true, 
-    default: 'personal' 
+  contactType: {
+    type: String,
+    enum: ['work', 'home', 'personal'],
+    required: true,
+    default: 'personal'
   },
 }, { 
   // Enable automatic creation of 'createdAt' and 'updatedAt' timestamps for each document

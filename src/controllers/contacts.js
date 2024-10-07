@@ -1,6 +1,7 @@
 // src/controllers/contacts.js
-import { getAllContacts, getContactById } from '../services/contacts.js';
 import pino from 'pino';
+import createHttpError from 'http-errors';
+import { getAllContacts, getContactById } from '../services/contacts.js';
 
 const logger = pino();
 
@@ -23,7 +24,7 @@ export const getContactController = async (req, res) => {
   try {
     const contact = await getContactById(contactId);
     if (!contact) {
-      return res.status(404).json({ message: 'Contact not found' });
+      throw createHttpError(404, 'Contact not found');
     }
     res.status(200).json({
       status: 200,

@@ -5,6 +5,7 @@ import {
   getContactById,
   createContact,
   updateContact,
+  deleteContact,
 } from '../services/contacts.js';
 
 // Controller to handle a request to fetch a single contact by its ID
@@ -90,6 +91,26 @@ export const updateContactController = async (req, res, next) => {
       message: "Successfully patched a contact!",
       data: updatedContact,
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Controller to handle a request to delete an existing contact
+export const deleteContactController = async (req, res, next) => {
+  const { contactId } = req.params;
+
+  try {
+    // Call the service to delete the contact
+    const deletedContact = await deleteContact(contactId);
+
+    // If the contact is not found, throw a 404 error
+    if (!deletedContact) {
+      throw createHttpError(404, "Contact not found");
+    }
+
+    // Respond with 204 No Content if the deletion is successful
+    res.status(204).send();
   } catch (err) {
     next(err);
   }

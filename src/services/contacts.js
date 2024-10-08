@@ -26,3 +26,9 @@ export const updateContact = async (id, updateData) => {
   // Set { new: true } to return the updated document
   return await Contact.findByIdAndUpdate(id, updateData, { new: true });
 };
+
+// Function to delete an existing contact
+export const deleteContact = async (id) => {
+  // Use Mongoose's findByIdAndDelete method to remove a contact by its ID
+  return await Contact.findByIdAndDelete(id);
+};

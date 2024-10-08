@@ -2,36 +2,10 @@
 title: README
 date: 2024-09-21 10:38
 author: II-777
-tags: goit-nodejs hw-03
+tags: goit-nodejs hw-03 expressjs, cors, pino, dotenv, mongoose
 ---
 
 # goit-nodejs-hw-03
-
-
-## EXAMPLE USAGE:
-
-## PROJECT STRUCTURE:
-```plaintext
-.
-├── eslint.config.js
-├── package.json
-├── package-lock.json
-├── README.md
-└── src
-    ├── data
-    │   └── contacts.json
-    ├── db
-    │   └── initMongoConnection.js
-    ├── index.js
-    ├── models
-    │   └── contact.js
-    ├── server.js
-    ├── services
-    │   └── contacts.js
-    └── utils
-
-6 directories, 10 files
-```
 
 ## SOFTWARE USED:
 - [faker (random data generator for testing and development)](https://www.npmjs.com/package/@faker-js/faker)

@@ -19,3 +19,10 @@ export const createContact = async (contactData) => {
   await contact.save();
   return contact;
 };
+
+// Function to update an existing contact
+export const updateContact = async (id, updateData) => {
+  // Use Mongoose's findByIdAndUpdate method to update a contact
+  // Set { new: true } to return the updated document
+  return await Contact.findByIdAndUpdate(id, updateData, { new: true });
+};

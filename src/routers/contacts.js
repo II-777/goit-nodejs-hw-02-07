@@ -1,6 +1,12 @@
 // src/routers/contacts.js
 import { Router } from 'express';
-import { getContactsController, getContactController, createContactController } from '../controllers/contacts.js';
+import { 
+    getContactsController,
+    getContactController,
+    createContactController,
+    updateContactController,
+ } from '../controllers/contacts.js';
+
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 // Create a new instance of an Express router
@@ -14,6 +20,9 @@ router.get('/contacts/:contactId', ctrlWrapper(getContactController));
 
 // Route to create a new contact
 router.post('/contacts', ctrlWrapper(createContactController));
+
+// Route to update an existing contact
+router.patch('/contacts/:contactId', ctrlWrapper(updateContactController));
 
 // Export the router instance for use in other modules
 export default router;

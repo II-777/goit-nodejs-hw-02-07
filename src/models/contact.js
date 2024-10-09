@@ -21,7 +21,8 @@ const contactSchema = new mongoose.Schema({
   },
 }, { 
   // Enable automatic creation of 'createdAt' and 'updatedAt' timestamps for each document
-  timestamps: true 
+  timestamps: true,
+  versionKey: false 
 });
 
 // Create a Mongoose model named 'Contact' based on the defined schema

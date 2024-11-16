@@ -4,8 +4,8 @@ import {
   getContactsController,
   getContactByIdController,
   createContactController,
-  patchContactController,
   deleteContactController,
+  patchContactController,
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { isValidId } from '../middlewares/isValidId.js';
@@ -18,35 +18,36 @@ import {
 const router = Router();
 
 // Route to get all contacts
-router.get('/contacts', ctrlWrapper(getContactsController));
+router.get('/', ctrlWrapper(getContactsController));
 
 // Route to get a contact
 router.get(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   ctrlWrapper(getContactByIdController),
 );
 
 // Route to create a new contact
 router.post(
-  '/contacts',
+  '/',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
-// Route to patch an existing contact
-router.patch(
-  '/contacts/:contactId',
-  validateBody(updateContactSchema),
-  isValidId,
-  ctrlWrapper(patchContactController),
-);
-
 // Route to delete an existing contact
 router.delete(
-  '/contacts/:contactId',
+  '/:contactId',
   isValidId,
   ctrlWrapper(deleteContactController),
 );
+
+// Route to patch an existing contact
+router.patch(
+  '/:contactId',
+  isValidId,
+  validateBody(updateContactSchema),
+  ctrlWrapper(patchContactController),
+);
+
 
 export default router;

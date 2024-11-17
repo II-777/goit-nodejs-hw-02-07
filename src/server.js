@@ -7,12 +7,13 @@ import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js'
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
+import { UPLOAD_DIR } from './constants/index.js';
 
 // Define the port to run the server, using the PORT environment variable or defaulting to 3000
 const PORT = Number(env('PORT', '3000'));
 
 // Function to start the Express server
-const setupServer = () => {
+export const setupServer = () => {
   // Create an instance of an Express application
   const app = express();
 
@@ -39,6 +40,9 @@ const setupServer = () => {
   // Use the contacts router for handling routes starting with /contacts
   app.use(router);
 
+  // Enable /uploads endpoint
+  app.use('/uploads', express.static(UPLOAD_DIR));
+
   // Handle all other routes, including non-existing routes (404)
   app.use('*', notFoundHandler);
 
@@ -51,5 +55,3 @@ const setupServer = () => {
       console.log(`Server is running on http://localhost:${PORT}`);
   });
 };
-
-export default setupServer;

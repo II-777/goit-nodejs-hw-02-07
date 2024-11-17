@@ -67,11 +67,17 @@ export const updateContact = async (
     payload,
     {
       new: true,
+      includeResultMetadata: true,
       ...options,
     },
   );
 
-  if (!rawResult || !rawResult.value) return null;
+  // Log the result for debugging
+  console.log('[!] Updated Contact in services:', rawResult.value);
+
+  if (!rawResult || !rawResult.value) {
+    return null;
+  };
 
   return {
     contact: rawResult.value,

@@ -343,7 +343,7 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -378,8 +378,9 @@
                   },
                   "photo": {
                     "type": "string",
-                    "description": "Updated link to the contact's photo.",
-                    "example": "https://res.cloudinary.com/dqgwuu/image/upload/avatar.png"
+                    "format": "binary",
+                    "description": "Upload the contact's photo as a file.",
+                    "example": null
                   }
                 }
               }

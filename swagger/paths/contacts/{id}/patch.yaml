@@ -15,7 +15,7 @@ parameters:
 requestBody:
   required: true
   content:
-    application/json:
+    multipart/form-data:
       schema:
         type: object
         properties:
@@ -41,8 +41,9 @@ requestBody:
             enum: ['work', 'home', 'personal']
           photo:
             type: string
-            description: "Updated link to the contact's photo."
-            example: 'https://res.cloudinary.com/dqgwuu/image/upload/avatar.png'
+            format: binary
+            description: "Upload the contact's photo as a file."
+            example: null
 responses:
   '200':
     description: 'Contact successfully updated.'

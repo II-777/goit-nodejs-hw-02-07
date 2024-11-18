@@ -1,0 +1,22 @@
+description: 'The requested contact could not be found.'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: 'ContactNotFoundError'
+        data:
+          type: object
+          properties:
+            message:
+              type: string
+              example: 'Contact not found.'

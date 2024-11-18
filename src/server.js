@@ -8,6 +8,7 @@ import { errorHandler } from './middlewares/errorHandler.js'
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 import { UPLOAD_DIR } from './constants/index.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 // Define the port to run the server, using the PORT environment variable or defaulting to 3000
 const PORT = Number(env('PORT', '3000'));
@@ -42,6 +43,9 @@ export const setupServer = () => {
 
   // Enable /uploads endpoint
   app.use('/uploads', express.static(UPLOAD_DIR));
+
+  // Swagger Docs endpoint
+  app.use('/api-docs', swaggerDocs());
 
   // Handle all other routes, including non-existing routes (404)
   app.use('*', notFoundHandler);

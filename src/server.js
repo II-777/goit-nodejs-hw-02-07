@@ -1,70 +1,53 @@
 // src/server.js
 import express from 'express';
+import pino from 'pino-http';
 import cors from 'cors';
-import pinoHttp from 'pino-http';
-import pino from 'pino';
-import { getAllContacts, getContactById } from './services/contacts.js';
+import contactsRouter from './routers/contacts.js';
+import { env } from './utils/env.js';
+import { errorHandler } from './middlewares/errorHandler.js'
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
-const logger = pino({
-    transport: {
-        target: 'pino-pretty',
-        options: {
-            colorize: true,
-        },
-    },
-});
+// Define the port to run the server, using the PORT environment variable or defaulting to 3001
+const PORT = Number(env('PORT', '3000'));
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(pinoHttp({ logger }));
-
-// Route to get all contacts
-app.get('/contacts', async (req, res) => {
-  try {
-    const contacts = await getAllContacts();
-    res.status(200).json({
-      status: 200,
-      message: "Successfully found contacts!",
-      data: contacts,
-    });
-  } catch (error) {
-    logger.error(error); // Log the error
-    res.status(500).json({ message: 'Error retrieving contacts' });
-  }
-});
-
-// Route to get a contact by ID
-app.get('/contacts/:contactId', async (req, res) => {
-  const { contactId } = req.params;
-  try {
-    const contact = await getContactById(contactId);
-    if (!contact) {
-      return res.status(404).json({ message: 'Contact not found' });
-    }
-    res.status(200).json({
-      status: 200,
-      message: `Successfully found contact with id ${contactId}!`,
-      data: contact,
-    });
-  } catch (error) {
-    logger.error(error); // Log the error
-    res.status(500).json({ message: 'Error retrieving contact' });
-  }
-});
-
-// Handle non-existing routes
-app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' });
-});
-
-// Get port from environment variable or default to 3001
-const PORT = process.env.PORT || 3001;
-
+// Function to start the Express server
 const setupServer = () => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+  // Create an instance of an Express application
+  const app = express();
+
+  // Middleware setup
+  app.use(express.json()); // Parse incoming JSON requests and make the data available in req.body
+  app.use(cors()); // Enable CORS for all routes, allowing requests from different origins
+
+  // Use Pino HTTP logging middleware to log HTTP requests
+  app.use(pino({
+      transport: {
+        target: 'pino-pretty',
+      },
+    }),
+  );
+
+  // Route for the root path
+  app.get('/', (req, res) => {
+    res.json({
+      message: 'Hello World!',
     });
+  });
+
+  // Use the contacts router for handling routes starting with /contacts
+  app.use(contactsRouter);
+
+  // Handle all other routes, including non-existing routes (404)
+  app.use('*', notFoundHandler);
+
+  // Global error handling middleware
+  app.use(errorHandler);
+
+  // Export the setupServer function for use in other modules
+  app.listen(PORT, () => {
+      // Log a message indicating the server is running
+      console.log(`Server is running on http://localhost:${PORT}`);
+  });
 };
 
 export default setupServer;

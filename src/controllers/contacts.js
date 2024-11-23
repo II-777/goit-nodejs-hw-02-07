@@ -17,6 +17,7 @@ export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
+  const userId = req.user._id;
 
   const contacts = await getAllContacts({
     page,
@@ -24,6 +25,7 @@ export const getContactsController = async (req, res) => {
     sortBy,
     sortOrder,
     filter,
+    userId,
   });
 
   res.status(200).json({
@@ -36,7 +38,7 @@ export const getContactsController = async (req, res) => {
 // Controller to handle a request to fetch a single contact
 export const getContactByIdController = async (req, res) => {
   const { contactId } = req.params;
-  const contact = await getContactById(contactId);
+  const contact = await getContactById(contactId, req.user._id);
 
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
@@ -51,7 +53,12 @@ export const getContactByIdController = async (req, res) => {
 
 // Controller to handle a request to create a new contact 
 export const createContactController = async (req, res) => {
-  const newContact = await createContact(req.body);
+  const contactPayload = {
+    ...req.body,
+    userId: req.user._id,
+  };
+
+  const newContact = await createContact(contactPayload);
 
   res.status(201).json({
     status: 201,
@@ -63,7 +70,7 @@ export const createContactController = async (req, res) => {
 // Controller to handle a request to update an existing contact
 export const patchContactController = async (req, res) => {
   const { contactId } = req.params;
-  const updatedContact = await updateContact(contactId, req.body);
+  const updatedContact = await updateContact(contactId, req.user._id, req.body);
 
   // If the contact is not found, throw a 404 error
   if (!updatedContact) {
@@ -83,7 +90,7 @@ export const deleteContactController = async (req, res) => {
   const { contactId } = req.params;
 
   // Call the service to delete the contact
-  const deletedContact = await deleteContact(contactId);
+  const deletedContact = await deleteContact(contactId, req.user._id);
 
   // If the contact is not found, throw a 404 error
   if (!deletedContact) {

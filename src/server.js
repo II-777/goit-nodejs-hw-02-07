@@ -2,10 +2,11 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import contactsRouter from './routers/contacts.js';
+import router from './routers/index.js';
 import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js'
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
+import cookieParser from 'cookie-parser';
 
 // Define the port to run the server, using the PORT environment variable or defaulting to 3000
 const PORT = Number(env('PORT', '3000'));
@@ -18,6 +19,7 @@ const setupServer = () => {
   // Middleware setup
   app.use(express.json()); // Parse incoming JSON requests and make the data available in req.body
   app.use(cors()); // Enable CORS for all routes, allowing requests from different origins
+  app.use(cookieParser()); // Extract data from cookies
 
   // Use Pino HTTP logging middleware to log HTTP requests
   app.use(pino({
@@ -35,7 +37,7 @@ const setupServer = () => {
   });
 
   // Use the contacts router for handling routes starting with /contacts
-  app.use(contactsRouter);
+  app.use(router);
 
   // Handle all other routes, including non-existing routes (404)
   app.use('*', notFoundHandler);

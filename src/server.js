@@ -7,7 +7,7 @@ import { env } from './utils/env.js';
 import { errorHandler } from './middlewares/errorHandler.js'
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
-// Define the port to run the server, using the PORT environment variable or defaulting to 3001
+// Define the port to run the server, using the PORT environment variable or defaulting to 3000
 const PORT = Number(env('PORT', '3000'));
 
 // Function to start the Express server

@@ -72,9 +72,6 @@ export const updateContact = async (
     },
   );
 
-  // Log the result for debugging
-  console.log('[!] Updated Contact in services:', rawResult.value);
-
   if (!rawResult || !rawResult.value) {
     return null;
   };
